@@ -1,0 +1,23 @@
+{
+  "name": "chatgpt-lag-fixer",
+  "version": "1.0.0",
+  "description": "Chrome extension for intelligent virtual scrolling in ChatGPT conversations to reduce lag and improve performance.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/chatgpt-virtual-scroller.git"
+  },
+  "keywords": [
+    "chatgpt",
+    "chrome-extension",
+    "virtual-scrolling",
+    "performance",
+    "optimization",
+    "dom-virtualization"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {}
+}
