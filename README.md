@@ -2,9 +2,18 @@
 
 **The ultimate performance booster for long ChatGPT conversations**
 
-ChatGPT Lag Fixer is a Chrome extension that uses intelligent virtual scrolling to keep your ChatGPT tabs lightning-fast, even during long conversations. Unlike simple DOM trimming solutions, this extension dynamically virtualizes messages outside your viewport while seamlessly restoring them as you scroll.
+ChatGPT Lag Fixer is a **Chrome and Firefox** extension that uses intelligent virtual scrolling to keep your ChatGPT tabs lightning-fast, even during long conversations. Unlike simple DOM trimming solutions, this extension dynamically virtualizes messages outside your viewport while seamlessly restoring them as you scroll.
 
-**🔐 Remain full privacy**: All processing happens **fully locally** in your browser. **Nothing** is sent to any server
+**🔐 Remain full privacy**: All processing happens **fully locally** in your browser. **Nothing** is sent to any server.
+
+## 📥 Download
+
+| Browser | Store Link |
+| :--- | :--- |
+| **Google Chrome** | [**Download from Chrome Web Store**](https://chromewebstore.google.com/detail/finipiejpmpccemiedioehhpgcafnndo?utm_source=item-share-cb) |
+| **Mozilla Firefox** | [**Download from Firefox Add-ons**](https://addons.mozilla.org/en-GB/firefox/addon/chatgpt-speed-booster/) |
+
+---
 
 ## Features
 
@@ -31,14 +40,15 @@ ChatGPT Lag Fixer is a Chrome extension that uses intelligent virtual scrolling 
 
 ## Installation
 
-### **Option 1 — Install from the Chrome Web Store (recommended)**  
-*(Link will be added once the extension is published)*  
+### **Option 1 — Install from Web Stores (Recommended)**
+Use the links in the [Download](#-download) section above to install the extension automatically for your specific browser.
 
-### **Option 2 — Install Manually (Unpacked Extension)**
+### **Option 2 — Install Manually (Unpacked)**
 
-If you want to run the extension locally or modify the code:
+If you want to run the extension locally or modify the code, follow the instructions for your browser below.
 
-1. Download or clone this repository
+#### 📦 For Google Chrome (and Edge/Brave)
+1. Download or clone this repository:
    ```bash
    git clone https://github.com/bramgiessen/chatgpt-lag-fixer.git
    ```
@@ -51,6 +61,18 @@ If you want to run the extension locally or modify the code:
 5. Select the project folder (the one containing manifest.json)
 6. Open ChatGPT — the extension will load automatically
 7. Use the extension icon in Chrome to open the settings popup
+
+#### 🦊 For Mozilla Firefox
+1. Download or clone this repository:
+   ```bash
+   git clone https://github.com/bramgiessen/chatgpt-lag-fixer.git
+   ```
+2. Open Firefox and navigate to:
+    ```bash
+   about:debugging#/runtime/this-firefox
+   ```
+3. Click Load Temporary Add-on...
+4. Navigate to your project folder and select the manifest.json file
 
 You're now running ChatGPT Lag Fixer locally, and you can make changes in the code!
 
@@ -93,10 +115,10 @@ It makes massive message lists behave like small ones.
 ## Development Notes
 
 ### Running the extension during development:
-- Load it unpacked via `chrome://extensions`
-- Open the console on ChatGPT and look for debug logs (if enabled)
+- Load the extension locally in your browser
+- Open the browser console on ChatGPT and look for debug logs (if enabled)
 - Use the popup toggle to enable/disable virtualization
-- When making changes, hit **Reload** on the extension page
+- When making changes, hit **Reload** on the extension page (for Chrome)
 
 ### Debug mode
 The popup includes an optional "Debug mode" that logs internal states such as:
@@ -106,16 +128,13 @@ The popup includes an optional "Debug mode" that logs internal states such as:
 - URL changes
 - Mutation observer triggers
 
-### From Chrome Web Store (Coming Soon)
-Search for "ChatGPT Virtual Scroller" in the Chrome Web Store
-
 
 ## 🔐 Privacy
 
 This extension:
 - Collects **no data**
 - Sends **nothing** to any server
-- Reads/writes only its own local Chrome storage (settings)
+- Reads/writes only its own local storage (settings)
 - Runs **only** on ChatGPT domains (`chat.openai.com` / `chatgpt.com`)
 
 All processing happens **fully locally** in your browser.
@@ -129,7 +148,7 @@ All processing happens **fully locally** in your browser.
 4. The extension works automatically! 🎉
 
 ### Accessing Settings
-- Click the extension icon in your Chrome toolbar
+- Click the extension icon in your Chrome/Firefox toolbar
 - See stats like nodes rendered, memory saved and more
 - Enable debug mode to see what's happening behind the scenes
 
@@ -159,7 +178,7 @@ The popup displays real-time statistics:
 
 
 ## Compatibility
-- Browser: Chrome (Manifest V3 with background scripts)
+- Browser: Chrome, Firefox (Manifest V3 with background scripts)
 - OS: Windows, macOS, Linux
 - ChatGPT: Optimized for current UI (as of 2025), resilient to minor changes
 
@@ -176,7 +195,6 @@ Contributions are welcome! Here's how you can help:
 
 ### Areas for Improvement
 - [ ] Support for other AI chat interfaces (Claude, Gemini, etc.)
-- [ ] Intersection Observer API for better performance
 
 
 ## Manifest V3 Compliance
@@ -186,7 +204,7 @@ This extension is built with **Manifest V3**, ensuring:
 - Minimal permissions
 - No remotely hosted code
 - Content Security Policy compliant
-- Future-proof for Chrome updates
+- Future-proof for Chrome/Firefox updates
 
 ## Troubleshooting
 
