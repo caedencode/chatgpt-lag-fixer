@@ -217,13 +217,11 @@ This extension is built with **Manifest V3**, ensuring:
 ### Messages not virtualizing?
 1. Ensure "Enable Virtual Scrolling" is ON in settings
 2. Check that you have enough messages (>10) in conversation
-3. Try increasing buffer size in settings
-4. Check browser console for errors
+3. Check browser console for errors
 
 ### Scroll position jumping?
-1. Try reducing buffer size
-2. Disable extension temporarily to see if ChatGPT is the issue
-3. Report the issue with reproduction steps
+1. Disable extension temporarily to see if ChatGPT is the issue
+2. Report the issue with reproduction steps
 
 ## License
 
@@ -233,4 +231,4 @@ MIT License - feel free to use, modify, and distribute!
 
 **Made with ❤️ by [Bram van der Giessen](https://bramgiessen.com)**
 
-⭐ If you find this useful, please star the repository!
+⭐ **If you find this useful, please star the repository!**
