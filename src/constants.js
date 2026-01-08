@@ -56,6 +56,9 @@ window.ChatGPTVirtualScroller = window.ChatGPTVirtualScroller || {};
       renderedMessages: 0
     },
 
+    /** @type {number | null} */
+    urlWatcherInterval: null,
+
     /** "IDLE" | "OBSERVING" */
     lifecycleStatus: /** @type {"IDLE" | "OBSERVING"} */ ("IDLE")
   };

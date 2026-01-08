@@ -143,10 +143,19 @@
 
   /**
    * Find the scrollable container for the conversation.
+   * Returns cached container if already found and still valid.
    *
-   * @returns {HTMLElement | Window}
+   * @returns {HTMLElement | Window | null}
    */
   function findScrollContainer() {
+    // Early bail-out: if we already have a scroll element, verify it's still valid
+    if (state.scrollElement && state.scrollElement !== window) {
+      const el = state.scrollElement;
+      if (el.isConnected) {
+        return el; // Still valid, skip expensive checks
+      }
+    }
+
     const firstMessage = document.querySelector(config.ARTICLE_SELECTOR);
 
     if (firstMessage instanceof HTMLElement) {
@@ -290,11 +299,48 @@
     }
   }
 
+  /**
+   * Detect if ChatGPT is currently streaming a response.
+   */
+  function isStreaming() {
+    return !!document.querySelector('[data-testid="stop-button"]');
+  }
+
+  /**
+   * Compute stats from a pre-queried node list.
+   * @param {NodeListOf<Element>} nodes
+   */
+  function computeStats(nodes) {
+    let total = 0;
+    let rendered = 0;
+
+    nodes.forEach((node) => {
+      if (!(node instanceof HTMLElement)) return;
+      if (!node.dataset.virtualId) return;
+
+      total += 1;
+      if (node.tagName === "ARTICLE") rendered += 1;
+    });
+
+    state.stats.totalMessages = total;
+    state.stats.renderedMessages = rendered;
+
+    // Check for new messages to trigger Nudge
+    if (scroller.DonationBadge) {
+       scroller.DonationBadge.onStatsUpdate(total);
+    }
+  }
+
   function virtualizeNow() {
     if (!state.enabled) return;
 
-    ensureVirtualIds();
+    // Skip virtualization while ChatGPT is streaming a response
+    if (isStreaming()) {
+      log("virtualize: streaming detected, skipping");
+      return;
+    }
 
+    // Single DOM query for all nodes (articles + spacers)
     const nodes = document.querySelectorAll(
       `${config.ARTICLE_SELECTOR}, div[data-chatgpt-virtual-spacer="1"]`
     );
@@ -302,6 +348,23 @@
       log("virtualize: no messages yet");
       return;
     }
+
+    // Assign virtual IDs to any new articles in the list
+    nodes.forEach((node) => {
+      if (!(node instanceof HTMLElement)) return;
+      if (node.tagName !== "ARTICLE") return;
+      
+      if (!node.dataset.virtualId) {
+        const newId = String(state.nextVirtualId++);
+        node.dataset.virtualId = newId;
+        state.articleMap.set(newId, node);
+      } else {
+        const id = node.dataset.virtualId;
+        if (id && !state.articleMap.has(id)) {
+          state.articleMap.set(id, node);
+        }
+      }
+    });
 
     const viewport = getViewportMetrics();
 
@@ -323,7 +386,11 @@
       }
     });
 
-    updateStats();
+    // Compute stats using already-queried nodes (re-query needed as DOM may have changed)
+    const updatedNodes = document.querySelectorAll(
+      `${config.ARTICLE_SELECTOR}, div[data-chatgpt-virtual-spacer="1"]`
+    );
+    computeStats(updatedNodes);
     log(
       `virtualize: total=${state.stats.totalMessages}, rendered=${state.stats.renderedMessages}`
     );
@@ -444,8 +511,14 @@
     );
   }
 
+  // Debounced resize handler
+  let resizeTimeout = null;
   function handleResize() {
-    scheduleVirtualization();
+    if (resizeTimeout) return;
+    resizeTimeout = setTimeout(() => {
+      resizeTimeout = null;
+      scheduleVirtualization();
+    }, 100);
   }
 
   function bootVirtualizer() {
@@ -495,7 +568,12 @@
   }
 
   function startUrlWatcher() {
-    setInterval(() => {
+    // Clear any existing interval to prevent stacking
+    if (state.urlWatcherInterval) {
+      clearInterval(state.urlWatcherInterval);
+    }
+    
+    state.urlWatcherInterval = setInterval(() => {
       if (window.location.href !== state.lastUrl) {
         state.lastUrl = window.location.href;
         log("URL changed → rebooting virtualizer");

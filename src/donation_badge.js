@@ -146,7 +146,7 @@
     show(bodyText = null, headerText = null) {
       if (this.isVisible) return;
 
-      // Rate limit check: Don't show if shown in last 30 mins
+      // Rate limit check: Don't show if shown in last 10 mins
       const lastShown = localStorage.getItem("chatgpt_virtual_scroller_donation_last_shown");
       const REAPPEAR_DELAY = 10 * 60 * 1000; // 10 mins
       if (lastShown) {

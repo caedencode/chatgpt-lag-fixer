@@ -36,56 +36,78 @@ document.addEventListener("DOMContentLoaded", () => {
     chrome.storage.sync.set({ debug: newValue });
   });
 
+  // Storage key for cached stats
+  const STATS_CACHE_KEY = "cachedStats";
+
+  /**
+   * Update the stats display elements
+   */
+  function displayStats(stats) {
+    totalMessagesElement.textContent = String(stats.totalMessages);
+    renderedMessagesElement.textContent = String(stats.renderedMessages);
+    memorySavedElement.textContent = `${stats.memorySavedPercent}%`;
+  }
+
   // Fetch stats from content script
-function updateStatsUI() {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    const activeTab = tabs[0];
-    if (!activeTab || activeTab.id == null) return;
+  function updateStatsUI() {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      const activeTab = tabs[0];
+      if (!activeTab || activeTab.id == null) return;
 
-    const url = activeTab.url || "";
-    const isChatGPTTab =
-      url.startsWith("https://chat.openai.com/") ||
-      url.startsWith("https://chatgpt.com/");
+      const url = activeTab.url || "";
+      const isChatGPTTab =
+        url.startsWith("https://chat.openai.com/") ||
+        url.startsWith("https://chatgpt.com/");
 
-    // Don't try to talk to tabs where our content script doesn't run
-    if (!isChatGPTTab) {
-      // Optionally show "N/A" or "Disabled" when not on ChatGPT
-      totalMessagesElement.textContent = "0";
-      renderedMessagesElement.textContent = "0";
-      memorySavedElement.textContent = "0%";
-      updateStatusText(false);
-      return;
-    }
-
-    chrome.tabs.sendMessage(
-      activeTab.id,
-      { type: "getStats" },
-      (response) => {
-        if (chrome.runtime.lastError) {
-          // Content script not injected yet or tab reloaded; just ignore
-          console.debug(
-            "[ChatGPT LagFix] No stats available:", chrome.runtime.lastError.message
-          );
-          return;
-        }
-
-        if (!response) return;
-
-        const {
-          totalMessages,
-          renderedMessages,
-          memorySavedPercent,
-          enabled
-        } = response;
-
-        totalMessagesElement.textContent = String(totalMessages);
-        renderedMessagesElement.textContent = String(renderedMessages);
-        memorySavedElement.textContent = `${memorySavedPercent}%`;
-        updateStatusText(enabled);
+      // Don't try to talk to tabs where our content script doesn't run
+      if (!isChatGPTTab) {
+        displayStats({ totalMessages: 0, renderedMessages: 0, memorySavedPercent: 0 });
+        updateStatusText(false);
+        return;
       }
-    );
-  });
-}
+
+      // Load cached stats immediately (prevents flash of 0)
+      chrome.storage.local.get(STATS_CACHE_KEY, (data) => {
+        const cached = data[STATS_CACHE_KEY];
+        if (cached && cached.url === url) {
+          displayStats(cached.stats);
+        }
+      });
+
+      // Fetch fresh stats from content script
+      chrome.tabs.sendMessage(
+        activeTab.id,
+        { type: "getStats" },
+        (response) => {
+          if (chrome.runtime.lastError) {
+            console.debug(
+              "[ChatGPT LagFix] No stats available:", chrome.runtime.lastError.message
+            );
+            return;
+          }
+
+          if (!response) return;
+
+          const {
+            totalMessages,
+            renderedMessages,
+            memorySavedPercent,
+            enabled
+          } = response;
+
+          const freshStats = { totalMessages, renderedMessages, memorySavedPercent };
+          displayStats(freshStats);
+          
+          // Cache for next popup open
+          chrome.storage.local.set({
+            [STATS_CACHE_KEY]: { url, stats: freshStats }
+          });
+          
+          updateStatusText(enabled);
+        }
+      );
+    });
+  }
 
   updateStatsUI();
 
