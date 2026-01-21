@@ -6,7 +6,7 @@ ChatGPT Lag Fixer is a **Chrome and Firefox** extension that uses intelligent vi
 
 **🔐 Remain full privacy**: All processing happens **fully locally** in your browser. **Nothing** is sent to any server.
 
-### ℹ️ Note Regarding this Repository
+#### ℹ️ Note Regarding this Repository
 
 The version currently live on the **Chrome & Firefox Web Store (v2.0+)** has moved to a new message-trimming approach for improved stability and performance.
 
