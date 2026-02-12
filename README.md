@@ -4,13 +4,16 @@
 
 ChatGPT Lag Fixer is a **Chrome and Firefox** extension that uses intelligent virtual scrolling to keep your ChatGPT tabs lightning-fast, even during long conversations. Unlike simple DOM trimming solutions, this extension dynamically virtualizes messages outside your viewport while seamlessly restoring them as you scroll.
 
-**🔐 Remain full privacy**: All processing happens **fully locally** in your browser. **Nothing** is sent to any server.
+### ℹ️ Evolution of the Project (v1.0 vs v2.0)
 
-#### ℹ️ Note Regarding this Repository
+I started this project as an open-source tool, and I’m proud of how much it has helped people. However, as the user base grew, maintaining it in my evenings alongside a full-time job became a massive commitment. 
 
-The version currently live on the **Chrome & Firefox Web Store (v2.0+)** has moved to a new message-trimming approach for improved stability and performance.
+To keep the project alive and sustainable **without** burning out, I made a few changes:
 
-I have kept this **v1.0 codebase** public and open-source to serve as a foundation for developers interested in building similar DOM-virtualization tools or forking the project for their own needs.
+* **This Repository (v1.0):** Remains **Open Source (MIT)**. I’m keeping this public so the community can still use the original logic as a learning resource or a foundation for their own tools regarding DOM virtualization.
+* **Web Store Version (v2.0+):** This version is **not open-sourced** at this point. It features a complete architectural rewrite for better performance and includes a "Pro" tier for a small one-time fee for new heavy users to help cover a bit of the ongoing development time spent. I want to stress that this version still runs **100% locally on your device and does NOT collect any data.**
+
+I want to be transparent about this shift—my goal is to ensure the extension stays fast, secure, and actively maintained for the long run.
 
 ---
 ## 📥 Download
