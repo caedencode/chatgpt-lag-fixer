@@ -20,8 +20,8 @@ I want to be transparent about this shift—my goal is to ensure the extension s
 
 | Browser | Store Link |
 | :--- | :--- |
-| **Google Chrome** | [**Download from Chrome Web Store (v2) **](https://chromewebstore.google.com/detail/finipiejpmpccemiedioehhpgcafnndo?utm_source=item-share-cb) |
-| **Mozilla Firefox** | [**Download from Firefox Add-ons (v2) **](https://addons.mozilla.org/en-GB/firefox/addon/chatgpt-speed-booster/) |
+| **Google Chrome** | [Download from Chrome Web Store (v2)](https://chromewebstore.google.com/detail/finipiejpmpccemiedioehhpgcafnndo?utm_source=item-share-cb) |
+| **Mozilla Firefox** | [Download from Firefox Add-ons (v2)](https://addons.mozilla.org/en-GB/firefox/addon/chatgpt-speed-booster/) |
 
 ---
 
