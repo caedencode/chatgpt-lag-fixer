@@ -232,13 +232,3 @@ This extension is built with **Manifest V3**, ensuring:
 ### Scroll position jumping?
 1. Disable extension temporarily to see if ChatGPT is the issue
 2. Report the issue with reproduction steps
-
-## License
-
-MIT License - feel free to use, modify, and distribute!
-
----
-
-**Made with ❤️ by [Bram van der Giessen](https://bramgiessen.com)**
-
-⭐ **If you find this useful, please star the repository!**
