@@ -243,7 +243,7 @@
         const rect = badge.getBoundingClientRect();
         this.triggerHeartExplosion(rect.left + rect.width / 2, rect.top + rect.height / 2);
         this.hide(badge);
-        setTimeout(() => window.open("https://ko-fi.com/bramgiessen", "_blank"), 400);
+        setTimeout(() => window.open("https://ko-fi.com/bgsn48", "_blank"), 400);
       });
 
       // Close handler
