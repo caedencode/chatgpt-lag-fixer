@@ -58,7 +58,7 @@ Use the links in the [Download](#-download) section above to install the extensi
 If you want to run the extension locally or modify the code, follow the instructions for your browser below.
 
 #### 📦 For Google Chrome (and Edge/Brave)
-1. Download or clone this repository:
+1. Download or clone this repository after forking it:
    ```bash
    git clone https://github.com/<YOUR_GH_ACCOUNT_NAME>/chatgpt-lag-fixer.git
    ```
@@ -73,7 +73,7 @@ If you want to run the extension locally or modify the code, follow the instruct
 7. Use the extension icon in Chrome to open the settings popup
 
 #### 🦊 For Mozilla Firefox
-1. Download or clone this repository:
+1. Download or clone this repository after forking it:
    ```bash
    git clone https://github.com/<YOUR_GH_ACCOUNT_NAME>/chatgpt-lag-fixer.git
    ```
