@@ -12,7 +12,7 @@ I started this project as an open-source tool, and I’m proud of how much it ha
 
 To keep the project alive and sustainable **without** burning out, I made a few changes:
 
-* **This Repository (v1.0):** Source is publicly available under the **PolyForm Strict License**. I’m keeping this public so the community can still use the original logic as a learning resource or a foundation for their own tools regarding DOM virtualization.
+* **This Repository (v1.0):** Source is publicly available under the **PolyForm Strict License**. I’m keeping this public so the community can still use the original logic as a learning resource for their own tools regarding DOM virtualization and Chrome extensions.
 * **Web Store Version (v2.0+):** This version is **not open-sourced** at this point. It features a complete architectural rewrite that works with the current version of ChatGPT and includes a "Pro" tier for a small one-time fee for new heavy users (still free for casual users) to help cover a bit of the ongoing development time spent. I want to stress that this version still runs **100% locally on your device and does NOT collect any data.**
 
 I want to be transparent about this shift—my goal is to ensure the extension stays fast, secure, and actively maintained for the long run.
